@@ -19,8 +19,8 @@ react-runtime
 react-meteor-data
 reactrouter:react-router-ssr
 webpack:webpack
-accounts-ui
 accounts-password
+accounts-base
 aldeed:simple-schema
 aldeed:collection2
 check

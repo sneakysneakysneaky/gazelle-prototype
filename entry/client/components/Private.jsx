@@ -13,7 +13,9 @@ export default React.createClass({
         }
     },
     componentDidUpdate: function (prevProps, prevState) {
-        //TODO Should authentication check and redirect be done here?
+        if (!this.data.isAuthenticated) {
+            this.history.push('/login');
+        }
     },
     render() {
         return (

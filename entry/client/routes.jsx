@@ -4,6 +4,7 @@ import MainApp from './MainApp';
 import Private from './components/Private';
 import Public from './components/Public';
 import PublicRoutes from 'Public/client/routes';
+import Home from 'Home/client/routes';
 
 const history = createHistory();
 
@@ -20,6 +21,7 @@ var routes = (
                 {PublicRoutes}
             </Route>
             <Route component={Private}>
+                {Home}
             </Route>
         </Route>
     </Router>
