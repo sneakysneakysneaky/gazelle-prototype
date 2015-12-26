@@ -15,11 +15,16 @@
   "file-loader": "^0.8.5",
   "style-loader": "^0.13.0",
   "css-loader": "^0.23.0",
+  "sass-loader": "3.1.2",
+  "node-sass": "3.4.2",
   "extract-text-webpack-plugin": "^0.9.1",
 
   "react-transform-hmr": "^1.0.0",
   "react-transform-catch-errors": "^1.0.0",
   "redbox-react": "^1.2.0",
   "react-helmet": "2.2.0",
-  "history": "1.16.0"
+  "history": "1.16.0",
+  "classnames": "2.2.1",
+  "bourbon": "4.2.6",
+  "bourbon-neat": "1.7.2"
 }

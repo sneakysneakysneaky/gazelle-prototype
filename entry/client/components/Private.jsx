@@ -1,4 +1,6 @@
 const { History } = ReactRouter;
+import Header from 'Header/client/components/Header'
+//import Footer from 'Footer/client/components/Footer'
 
 export default React.createClass({
     mixins: [ReactMeteorData, History],
@@ -19,8 +21,11 @@ export default React.createClass({
     },
     render() {
         return (
-            <div>
-                {this.props.children}
+            <div className='main-container'>
+                <Header />
+                <div className='main-content'>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

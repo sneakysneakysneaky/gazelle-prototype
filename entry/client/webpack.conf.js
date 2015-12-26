@@ -39,7 +39,10 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, loader: 'babel', query: babelSettings, exclude: /node_modules/ },
-            { test: /\.css$/, loader: cssLoader },
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            },
             { test: /\.(png|jpe?g)(\?.*)?$/, loader: 'url?limit=8182' },
             { test: /\.(svg|ttf|woff|eot)(\?.*)?$/, loader: 'file' }
         ]
