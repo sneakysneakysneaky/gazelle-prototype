@@ -1,111 +1,115 @@
-import NavMenu from './NavMenu'
+import NavMenu from './NavMenu';
 import classNames from 'classnames';
 
 export default React.createClass({
 
-    propTypes: {
-        children: React.PropTypes.array,
-        depth: React.PropTypes.number.isRequired,
-        maxDepth: React.PropTypes.number.isRequired,
-        title: React.PropTypes.string.isRequired,
-        url: React.PropTypes.string.isRequired
-    },
+  displayName: 'NavItem',
 
-    getDefaultProps () {
-        return {
-            children: null
-        };
-    },
+  propTypes: {
+    children: React.PropTypes.array,
+    depth: React.PropTypes.number.isRequired,
+    maxDepth: React.PropTypes.number.isRequired,
+    title: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired
+  },
 
-    getInitialState () {
-        return {
-            animating: false,
-            expanded: false
-        };
-    },
+  getDefaultProps () {
+    return {
+      children: null
+    };
+  },
 
-    onMouseOver () {
-        this.setState({
-            animating: true,
-            expanded: true
-        });
-    },
+  getInitialState () {
+    return {
+      animating: false,
+      expanded: false
+    };
+  },
 
-    onMouseOut () {
-        this.setState({
-            expanded: false
-        });
-    },
+  onMouseOver () {
+    this.setState({
+      animating: true,
+      expanded: true
+    });
+  },
 
-    hasSubmenu () {
-        const { children, depth, maxDepth } = this.props;
-        return !!children && children.length > 0 && depth < maxDepth;
-    },
+  onMouseOut () {
+    this.setState({
+      expanded: false
+    });
+  },
 
-    cssPrefix () {
-        const { depth } = this.props;
-        const prefix = `main-nav__level${depth}`;
-        return prefix;
-    },
+  hasSubmenu () {
+    const { children, depth, maxDepth } = this.props;
+    return !!children && children.length > 0 && depth < maxDepth;
+  },
 
-    classNames () {
-        const { animating, expanded } = this.state;
-        const prefix = this.cssPrefix();
-        const hasSubmenu = this.hasSubmenu();
+  cssPrefix () {
+    const { depth } = this.props;
+    const prefix = `main-nav__level${depth}`;
+    return prefix;
+  },
 
-        return classNames({
-            [`${prefix}__item`]: true,
-            [`${prefix}__item--animating`]: animating,
-            [`${prefix}__item--expanded`]: expanded,
-            [`${prefix}__item--submenu`]: hasSubmenu
-        });
-    },
+  classNames () {
+    const { animating, expanded } = this.state;
+    const prefix = this.cssPrefix();
+    const hasSubmenu = this.hasSubmenu();
 
-    linkClassNames () {
-        const prefix = this.cssPrefix();
-        return `${prefix}__link`;
-    },
+    return classNames({
+      [`${prefix}__item`]: true,
+      [`${prefix}__item--animating`]: animating,
+      [`${prefix}__item--expanded`]: expanded,
+      [`${prefix}__item--submenu`]: hasSubmenu
+    });
+  },
 
-    submenuClassNames () {
-        const prefix = this.cssPrefix();
-        return `${prefix}__submenu`;
-    },
+  linkClassNames () {
+    const prefix = this.cssPrefix();
+    return `${prefix}__link`;
+  },
 
-    render () {
-        const { title, url } = this.props;
-        const classNames = this.classNames();
-        const linkClassNames = this.linkClassNames();
+  submenuClassNames () {
+    const prefix = this.cssPrefix();
+    return `${prefix}__submenu`;
+  },
 
-        return (
-            <li className={classNames}
-                onMouseOver={this.onMouseOver}
-                onMouseOut={this.onMouseOut}>
-                <a className={linkClassNames} href={url}>
-                    {title}
-                </a>
+  render () {
+    const { title, url } = this.props;
+    const classNames = this.classNames();
+    const linkClassNames = this.linkClassNames();
 
-                {this.renderSubmenu()}
-            </li>
-        );
-    },
+    return (
+      <li className={classNames}
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+      >
+        <a className={linkClassNames} href={url}>
+            {title}
+        </a>
 
-    renderSubmenu () {
-        const { children, depth, maxDepth } = this.props;
-        const hasSubmenu = this.hasSubmenu();
+        {this.renderSubmenu()}
+      </li>
+    );
+  },
 
-        if (hasSubmenu) {
-            const submenuClassNames = this.submenuClassNames();
-            const submenuDepth = depth + 1;
-            const submenuMaxDepth = maxDepth - 1;
+  renderSubmenu () {
+    const { children, depth, maxDepth } = this.props;
+    const hasSubmenu = this.hasSubmenu();
 
-            return (
-                <div className={submenuClassNames}>
-                    <NavMenu depth={submenuDepth}
-                                        maxDepth={submenuMaxDepth}
-                                        menu={children} />
-                </div>
-            );
-        }
+    if (hasSubmenu) {
+      const submenuClassNames = this.submenuClassNames();
+      const submenuDepth = depth + 1;
+      const submenuMaxDepth = maxDepth - 1;
+
+      return (
+        <div className={submenuClassNames}>
+          <NavMenu depth={submenuDepth}
+            maxDepth={submenuMaxDepth}
+            menu={children}
+          />
+        </div>
+      );
     }
+  }
 
 });

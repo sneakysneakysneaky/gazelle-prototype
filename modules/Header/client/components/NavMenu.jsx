@@ -1,44 +1,47 @@
-import NavItem from './NavItem'
+import NavItem from './NavItem';
 
 export default React.createClass({
 
-    propTypes: {
-        depth: React.PropTypes.number,
-        maxDepth: React.PropTypes.number.isRequired,
-        menu: React.PropTypes.array.isRequired
-    },
+  displayName: 'NavMenu',
 
-    getDefaultProps () {
-        return {
-            depth: 1
-        };
-    },
+  propTypes: {
+    depth: React.PropTypes.number,
+    maxDepth: React.PropTypes.number.isRequired,
+    menu: React.PropTypes.array.isRequired
+  },
 
-    classNames () {
-        const { depth } = this.props;
-        return `main-nav__level${depth}`;
-    },
+  getDefaultProps () {
+    return {
+      depth: 1
+    };
+  },
 
-    render () {
-        const { depth, menu } = this.props;
-        const classNames = this.classNames();
+  classNames () {
+    const { depth } = this.props;
+    return `main-nav__level${depth}`;
+  },
 
-        return (
-            <ul className={classNames}>
-                {menu.map(this.renderItem)}
-            </ul>
-        );
-    },
+  render () {
+    const { depth, menu } = this.props;
+    const classNames = this.classNames();
 
-    renderItem (item, index) {
-        const { depth, maxDepth } = this.props;
+    return (
+      <ul className={classNames}>
+        {menu.map(this.renderItem)}
+      </ul>
+    );
+  },
 
-        return (
-            <NavItem key={index}
-                                depth={depth}
-                                maxDepth={maxDepth}
-                {...item} />
-        );
-    }
+  renderItem (item, index) {
+    const { depth, maxDepth } = this.props;
+
+    return (
+      <NavItem key={index}
+        depth={depth}
+        maxDepth={maxDepth}
+        {...item}
+      />
+    );
+  }
 
 });

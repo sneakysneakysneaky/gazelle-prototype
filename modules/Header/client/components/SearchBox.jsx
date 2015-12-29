@@ -1,34 +1,37 @@
 export default React.createClass({
 
-    propTypes: {
-        placeholder: React.PropTypes.string,
-        showButton: React.PropTypes.bool
-    },
+  displayName: 'SearchBox',
 
-    getDefaultProps () {
-        return {
-            placeholder: null,
-            showButton: false
-        };
-    },
+  propTypes: {
+    placeholder: React.PropTypes.string,
+    showButton: React.PropTypes.bool
+  },
 
-    render () {
-        const { placeholder, showButton } = this.props;
+  getDefaultProps () {
+    return {
+      placeholder: null,
+      showButton: false
+    };
+  },
 
-        return (
-            <div className='search-box'>
-                <input ref='input'
-                       className='search-box__input'
-                       type='search'
-                       placeholder={placeholder} />
+  render () {
+    const { placeholder, showButton } = this.props;
 
-                {showButton &&
-                <button className='search-box__button' type='button'>
-                    Search
-                </button>
-                    }
-            </div>
-        );
-    }
+    return (
+      <div className='search-box'>
+        <input ref='input'
+          className='search-box__input'
+          type='search'
+          placeholder={placeholder}
+        />
+
+        {showButton &&
+          <button className='search-box__button' type='button'>
+            Search
+          </button>
+        }
+      </div>
+    );
+  }
 
 });

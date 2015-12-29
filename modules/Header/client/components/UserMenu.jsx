@@ -2,91 +2,96 @@ import classNames from 'classnames';
 
 export default React.createClass({
 
-    mixins: [ReactMeteorData],
+  displayName: 'UserMenu',
 
-    getInitialState () {
-        return {
-            animating: false,
-            expanded: false
-        };
-    },
+  mixins: [ ReactMeteorData ],
 
-    getMeteorData () {
-        const currentUser = Meteor.user();
+  getInitialState () {
+    return {
+      animating: false,
+      expanded: false
+    };
+  },
 
-        return {
-            username: currentUser ? currentUser.username : null
-        };
-    },
+  getMeteorData () {
+    const currentUser = Meteor.user();
 
-    onAvatarClick () {
-        const { expanded } = this.state;
+    return {
+      username: currentUser ? currentUser.username : null
+    };
+  },
 
-        this.setState({
-            animating: true,
-            expanded: !expanded
-        });
-    },
+  onAvatarClick () {
+    const { expanded } = this.state;
 
-    onSignOutClick () {
-        Meteor.logout(); // TODO: Routing
-    },
+    this.setState({
+      animating: true,
+      expanded: !expanded
+    });
+  },
 
-    classNames () {
-        const { animating, expanded } = this.state;
+  onSignOutClick () {
+    Meteor.logout(); // TODO: Routing
+  },
 
-        return classNames({
-            'user-menu': true,
-            'user-menu--animating': animating,
-            'user-menu--active': expanded,
-            'user-menu--inactive': !expanded
-        });
-    },
+  classNames() {
+    const { animating, expanded } = this.state;
 
-    render () {
-        const { expanded } = this.state;
-        const { username } = this.data;
-        const classNames = this.classNames();
+    return classNames({
+      'user-menu': true,
+      'user-menu--animating': animating,
+      'user-menu--active': expanded,
+      'user-menu--inactive': !expanded
+    });
+  },
 
-        return (
-            <div className={classNames} role='menu'>
-                <div className='user-menu__username__container'>
-                    {username}
+  render () {
+    const { expanded } = this.state;
+    const { username } = this.data;
+    const classNames = this.classNames();
 
-                    <dl className='user-menu__stats'>
-                        <dt className='user-menu__stats__label'>Up</dt>
-                        <dd className='user-menu__stats__value'>XX</dd>
+    return (
+      <div className={classNames} role='menu'>
+        <div className='user-menu__username__container'>
+          {username}
 
-                        <dt className='user-menu__stats__label'>Down</dt>
-                        <dd className='user-menu__stats__value'>XX</dd>
+          <dl className='user-menu__stats'>
+            <dt className='user-menu__stats__label'>Up</dt>
+            <dd className='user-menu__stats__value'>XX</dd>
 
-                        <dt className='user-menu__stats__label'>Ratio</dt>
-                        <dd className='user-menu__stats__value'>XX</dd>
+            <dt className='user-menu__stats__label'>Down</dt>
+            <dd className='user-menu__stats__value'>XX</dd>
 
-                        <dt className='user-menu__stats__label'>Required</dt>
-                        <dd className='user-menu__stats__value'>XX</dd>
-                    </dl>
-                </div>
+            <dt className='user-menu__stats__label'>Ratio</dt>
+            <dd className='user-menu__stats__value'>XX</dd>
 
-                <div className='user-menu__avatar__container'
-                     onClickCapture={this.onAvatarClick}>
-                    <div className='user-menu__avatar'
-                         role='button'
-                         aria-expanded={expanded}>
-                        {/* TODO Avatar Img Here */}
-                    </div>
+            <dt className='user-menu__stats__label'>Required</dt>
+            <dd className='user-menu__stats__value'>XX</dd>
+          </dl>
+        </div>
 
-                    <ul className='user-menu__menu' role='menu'>
-                        <li className='user-menu__menu__item'>
-                <span className='user-menu__menu__item__signout'
-                      onClick={this.onSignOutClick}>
-                  Sign out
-                </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        );
-    }
+        <div className='user-menu__avatar__container'
+          onClickCapture={this.onAvatarClick}
+        >
+          <div className='user-menu__avatar'
+            role='button'
+            aria-expanded={expanded}
+          >
+            { /* TODO Avatar Img Here */ }
+          </div>
+
+          <ul className='user-menu__menu' role='menu'>
+            <li className='user-menu__menu__item'>
+              <span className='user-menu__menu__item__signout'
+                onClick={this.onSignOutClick}
+              >
+                Sign out
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
 
 });
