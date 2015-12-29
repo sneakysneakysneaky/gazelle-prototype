@@ -1,0 +1,25 @@
+@import (reference) '../../../modules/stylesheets/client/vars.less';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: @colorBgBody;
+  font-family: @fontFamilyBase;
+  line-height: 1.5;
+}
+
+strong {
+  font-family: @fontFamilySansSerifBold;
+}
+
+em {
+  font-family: @fontFamilySansSerifItalic;
+}
+
+strong em,
+em strong {
+  font-family: @fontFamilySansSerifBoldItalic;
+}

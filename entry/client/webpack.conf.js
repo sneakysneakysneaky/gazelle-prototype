@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var precss = require('precss');
 
 var babelSettings = { presets: ['react', 'es2015', 'stage-0'] };
 babelSettings.plugins = ['transform-decorators-legacy'];
@@ -24,13 +25,13 @@ var plugins = [];
 
 if (process.env.NODE_ENV === 'production') {
     plugins.push(new ExtractTextPlugin('style.css', { allChunks: true }));
-    cssLoader = ExtractTextPlugin.extract('style', 'css?module&localIdentName=[hash:base64:5]');
+    cssLoader = ExtractTextPlugin.extract('style', 'css?module&localIdentName=[hash:base64:5]!postcss!less');
 
     if (!Meteor.isCordova) {
         plugins.push(new webpack.optimize.CommonsChunkPlugin('common', 'common.web.js'));
     }
 } else {
-    cssLoader = 'style!css?module&localIdentName=[name]__[local]__[hash:base64:5]';
+    cssLoader = 'style!css?module&localIdentName=[name]__[local]__[hash:base64:5]!postcss!less';
 }
 
 module.exports = {
@@ -39,12 +40,9 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, loader: 'babel', query: babelSettings, exclude: /node_modules/ },
-            {
-                test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
-            },
             { test: /\.(png|jpe?g)(\?.*)?$/, loader: 'url?limit=8182' },
-            { test: /\.(svg|ttf|woff|eot)(\?.*)?$/, loader: 'file' }
+            { test: /\.(svg|ttf|woff|eot)(\?.*)?$/, loader: 'file' },
+            { test: /\.less$/, loader: cssLoader }
         ]
     }
 };

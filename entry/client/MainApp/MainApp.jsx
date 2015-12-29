@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Helmet from 'react-helmet';
+import './mainapp.less';
 
 export default class MainApp extends Component {
     render() {

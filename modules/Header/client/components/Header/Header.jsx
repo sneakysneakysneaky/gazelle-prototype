@@ -1,8 +1,9 @@
 //const siteName = Meteor.settings.public.site.name; // TODO: Move to utility
 //TODO Use Link component
-import UserMenu from './UserMenu';
-import Nav from './Nav';
-import SecondaryNav from './SecondaryNav';
+import UserMenu from '../UserMenu';
+import Nav from '../Nav';
+import SecondaryNav from '../SecondaryNav';
+import * as styles from './header.less';
 
 export default React.createClass({
 
@@ -10,10 +11,10 @@ export default React.createClass({
 
   render () {
     return (
-      <header className='main-header' role='banner'>
-        <div className='main-header__container'>
-          <h1 className='main-title'>
-            <a className='main-title__link' href='/home'>
+      <header role='banner'>
+        <div className={styles.container}>
+          <h1 className={styles.title}>
+            <a className={styles.titleLink} href='/home'>
               The site name
             </a>
           </h1>

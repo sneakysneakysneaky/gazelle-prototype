@@ -1,0 +1,24 @@
+@import (reference) '../../../../Stylesheets/client/vars.less';
+
+@colorBorderBottom: #909193;
+
+.container {
+  composes: clearfix from 'less!../../../../Stylesheets/client/common.less';
+  composes: dark-box from 'less!../../../../Stylesheets/client/common.less';
+  border-bottom: 1px solid @colorBorderBottom;
+  padding: 1.5em @layoutGutter 0;
+}
+
+.title {
+  float: left;
+  font-family: @fontFamilySansSerifLight;
+  font-weight: normal;
+  margin: 0;
+}
+
+.titleLink {
+  &::link, &::visited, &::hover {
+    color: @colorTextDarkBox;
+    text-decoration: normal;
+  }
+}
